@@ -25,6 +25,7 @@ public partial class Player : Node2D
 	{
 		Node2D newBullet = bullet.Instantiate<Node2D>();
 		newBullet.Position = gun.GlobalPosition;
+		newBullet.Rotation = angle;
 		AddChild(newBullet);
 	}
 

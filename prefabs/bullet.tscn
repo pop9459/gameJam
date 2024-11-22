@@ -1,4 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://bwrj0ne0cb20b"]
+[gd_scene load_steps=3 format=3 uid="uid://bwrj0ne0cb20b"]
+
+[ext_resource type="Script" path="res://scripts/bullet.cs" id="1_b5tip"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_rgu8u"]
 size = Vector2(5, 5)
@@ -7,3 +9,4 @@ size = Vector2(5, 5)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = SubResource("PlaceholderTexture2D_rgu8u")
+script = ExtResource("1_b5tip")
