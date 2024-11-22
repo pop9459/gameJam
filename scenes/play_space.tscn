@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://bd5wy7ldnfyjp"]
+[gd_scene load_steps=7 format=3 uid="uid://bd5wy7ldnfyjp"]
 
 [ext_resource type="Script" path="res://scripts/Player.cs" id="1_cwxqi"]
+[ext_resource type="PackedScene" uid="uid://bwrj0ne0cb20b" path="res://prefabs/bullet.tscn" id="1_eoggm"]
 
 [sub_resource type="Gradient" id="Gradient_unpoe"]
 
@@ -28,6 +29,7 @@ texture = SubResource("GradientTexture2D_ov05a")
 
 [node name="Player" type="Node2D" parent="."]
 script = ExtResource("1_cwxqi")
+bullet = ExtResource("1_eoggm")
 
 [node name="Body" type="Sprite2D" parent="Player"]
 texture = SubResource("PlaceholderTexture2D_e643y")

@@ -3,9 +3,10 @@ using System;
 
 public partial class Player : Node2D
 {
-	public float angle = 0f; // Current angle in radians
+	private float angle = 0f; // Current angle in radians
 	private float radius = 25f; // Distance from parent
 	private Node2D gun;
+	[Export] private PackedScene bullet;
 	public override void _Ready()
 	{
 		gun = GetNode<Node2D>("Gun");
@@ -14,7 +15,17 @@ public partial class Player : Node2D
 	public override void _Process(double delta)
 	{
 		aim();
-		
+		if (Input.IsActionJustPressed("shoot"))
+		{
+			shoot();
+		}
+	}
+
+	private void shoot()
+	{
+		Node2D newBullet = bullet.Instantiate<Node2D>();
+		newBullet.Position = gun.GlobalPosition;
+		AddChild(newBullet);
 	}
 
 	private void aim()
