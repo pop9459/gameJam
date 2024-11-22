@@ -3,12 +3,9 @@ using System;
 
 public partial class Aim : Node2D
 {
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	private float angle = 0f; // Current angle in radians
+	public float angle = 0f; // Current angle in radians
 	private float radius = 25f; // Distance from parent
-	private float speed = 2f; // Speed of rotation
 	private Node2D gun;
-	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
 		gun = GetNode<Node2D>("Gun");
