@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=3 uid="uid://bd5wy7ldnfyjp"]
+
+[ext_resource type="Script" path="res://scripts/Aim.cs" id="1_umwtd"]
+
+[sub_resource type="Gradient" id="Gradient_unpoe"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ov05a"]
+gradient = SubResource("Gradient_unpoe")
+width = 800
+height = 600
+fill_from = Vector2(0, 0.476103)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_e643y"]
+size = Vector2(25, 25)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_kmtb2"]
+size = Vector2(5, 5)
+
+[node name="PlaySpace" type="Node2D"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Room" type="Node" parent="."]
+
+[node name="Bkg" type="Sprite2D" parent="Room"]
+z_index = -10
+texture = SubResource("GradientTexture2D_ov05a")
+
+[node name="Player" type="Node2D" parent="."]
+script = ExtResource("1_umwtd")
+
+[node name="Body" type="Sprite2D" parent="Player"]
+texture = SubResource("PlaceholderTexture2D_e643y")
+
+[node name="Gun" type="Sprite2D" parent="Player"]
+position = Vector2(0, 25)
+texture = SubResource("PlaceholderTexture2D_kmtb2")
