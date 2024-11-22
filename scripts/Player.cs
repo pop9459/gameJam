@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class Aim : Node2D
+public partial class Player : Node2D
 {
 	public float angle = 0f; // Current angle in radians
 	private float radius = 25f; // Distance from parent

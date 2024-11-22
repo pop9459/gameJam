@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://bd5wy7ldnfyjp"]
 
-[ext_resource type="Script" path="res://scripts/Aim.cs" id="1_umwtd"]
+[ext_resource type="Script" path="res://scripts/Player.cs" id="1_cwxqi"]
 
 [sub_resource type="Gradient" id="Gradient_unpoe"]
 
@@ -27,7 +27,7 @@ z_index = -10
 texture = SubResource("GradientTexture2D_ov05a")
 
 [node name="Player" type="Node2D" parent="."]
-script = ExtResource("1_umwtd")
+script = ExtResource("1_cwxqi")
 
 [node name="Body" type="Sprite2D" parent="Player"]
 texture = SubResource("PlaceholderTexture2D_e643y")
