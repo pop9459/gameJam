@@ -13,6 +13,12 @@ public partial class Player : Node2D
 
 	public override void _Process(double delta)
 	{
+		aim();
+		
+	}
+
+	private void aim()
+	{
 		Vector2 mousePosition = GetGlobalMousePosition();
 
 		// Calculate the direction to the mouse
