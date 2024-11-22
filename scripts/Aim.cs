@@ -16,12 +16,13 @@ public partial class Aim : Node2D
 
 	public override void _Process(double delta)
 	{
-		Vector2 mousePosition = GetViewport().GetMousePosition();
+		Vector2 mousePosition = GetGlobalMousePosition();
 
+		// Calculate the direction to the mouse
 		Vector2 directionToMouse = (mousePosition - GlobalPosition).Normalized();
 
 		// Increment the angle over time
-		angle = directionToMouse.Angle();
+		angle = directionToMouse.Angle();	
 
 		// Keep the angle within a valid range (optional)
 		angle = Mathf.Wrap(angle, 0, 2 * Mathf.Pi);
