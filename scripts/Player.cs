@@ -7,6 +7,10 @@ public partial class Player : Node2D
 	private float radius = 25f; // Distance from parent
 	private Node2D gun;
 	[Export] private PackedScene bullet;
+	private bool redEnabled = false;
+	private bool greenEnabled = false;
+	private bool blueEnabled = false;
+	private Color selectedColor = new Color(1, 1, 1); 
 	public override void _Ready()
 	{
 		gun = GetNode<Node2D>("Gun");
@@ -15,10 +19,21 @@ public partial class Player : Node2D
 	public override void _Process(double delta)
 	{
 		aim();
+		selectColor();
 		if (Input.IsActionJustPressed("shoot"))
 		{
 			shoot();
 		}
+	}
+	private void selectColor()
+	{
+		redEnabled = Input.IsActionPressed("select1");
+		greenEnabled = Input.IsActionPressed("select2");
+		blueEnabled = Input.IsActionPressed("select3");
+		
+		selectedColor.R = redEnabled ? 1 : 0;
+		selectedColor.G = greenEnabled ? 1 : 0;
+		selectedColor.B = blueEnabled ? 1 : 0;
 	}
 
 	private void shoot()
@@ -26,6 +41,7 @@ public partial class Player : Node2D
 		Node2D newBullet = bullet.Instantiate<Node2D>();
 		newBullet.Position = gun.GlobalPosition;
 		newBullet.Rotation = angle;
+		newBullet.GetNode<Sprite2D>("BulletImg").SelfModulate = selectedColor;
 		AddChild(newBullet);
 	}
 

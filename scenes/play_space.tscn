@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/Player.cs" id="1_cwxqi"]
 [ext_resource type="PackedScene" uid="uid://bwrj0ne0cb20b" path="res://prefabs/bullet.tscn" id="1_eoggm"]
+[ext_resource type="Texture2D" uid="uid://cwyiscta484y8" path="res://assets/lilguyF.png" id="3_ud46j"]
 
 [sub_resource type="Gradient" id="Gradient_unpoe"]
 
@@ -10,9 +11,6 @@ gradient = SubResource("Gradient_unpoe")
 width = 800
 height = 600
 fill_from = Vector2(0, 0.476103)
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_e643y"]
-size = Vector2(25, 25)
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_kmtb2"]
 size = Vector2(5, 5)
@@ -32,7 +30,8 @@ script = ExtResource("1_cwxqi")
 bullet = ExtResource("1_eoggm")
 
 [node name="Body" type="Sprite2D" parent="Player"]
-texture = SubResource("PlaceholderTexture2D_e643y")
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("3_ud46j")
 
 [node name="Gun" type="Sprite2D" parent="Player"]
 position = Vector2(0, 25)
