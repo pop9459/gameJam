@@ -24,7 +24,8 @@ public partial class Player : Node2D
 	}
 	private void OnAreaEntered(Area2D area)
     {
-        GD.Print($"Collision detected with: {area.Name}");
+		//TODO: subtract health
+        area.GetParent().QueueFree();
     }
 	public override void _Process(double delta)
 	{
