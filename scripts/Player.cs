@@ -5,6 +5,8 @@ public partial class Player : Node2D
 {
 	private float angle = 0f; // Current angle in radians
 	private float radius = 25f; // Distance from parent
+	private int health = 3; // Player health
+	private int maxHealth = 3; // Player max health
 	private Node2D gun;
 	[Export] private PackedScene bullet;
 	private bool redEnabled = false;
@@ -14,10 +16,12 @@ public partial class Player : Node2D
 	[Export] private Node2D greenIndicator;
 	[Export] private Node2D blueIndicator;
 	[Export] private Node2D mixIndicator;
-	[Export] private Color selectedColor = new Color(1, 1, 1); 
+	[Export] private Color selectedColor = new Color(1, 1, 1);
+	[Export] private Node2D[] hearts; // A container holding the heart icons
 	public override void _Ready()
 	{
 		gun = GetNode<Node2D>("Gun");
+		UpdateHeartsUI();
 	}
 
 	public override void _Process(double delta)
@@ -87,5 +91,38 @@ public partial class Player : Node2D
 		{
 			gun.Scale = new Vector2(gun.Scale.X, Mathf.Abs(gun.Scale.Y));
 		}
+	}
+
+	public void TakeDamage(int damage)
+	{
+		health -= damage;
+		health = Mathf.Max(health, 0); // Prevent health from going below 0.
+		GD.Print($"Player Health: {health}");
+		UpdateHeartsUI();
+
+		if (health <= 0)
+		{
+			Die();
+		}
+	}
+
+	public void UpdateHeartsUI()
+	{
+		for (int i = 0; i < hearts.Length; i++)
+		{
+			if (i < health)
+			{
+				hearts[i].Visible = true;
+			}
+			else
+			{
+				hearts[i].Visible = false;
+			}
+		}
+	}
+
+	public void Die()
+	{
+		GetTree().ChangeSceneToFile("res://scenes/GameOver.tscn");
 	}
 }

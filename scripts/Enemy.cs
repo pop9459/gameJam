@@ -9,12 +9,12 @@ public partial class Enemy : Node2D
 	{
 		this.player = player;
 	}
-    public override void _EnterTree()
-    {
+	public override void _EnterTree()
+	{
 
-    }
-    // Called every frame. 'delta' is the elapsed time since the previous frame.
-    public override void _Process(double delta)
+	}
+	// Called every frame. 'delta' is the elapsed time since the previous frame.
+	public override void _Process(double delta)
 	{
 		if (player == null) return;
 		Vector2 direction = (player.GlobalPosition - GlobalPosition).Normalized();
