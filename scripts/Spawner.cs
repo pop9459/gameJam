@@ -34,6 +34,15 @@ public partial class Spawner : Node2D
 		Enemy newEnemy = enemy.Instantiate<Enemy>();
 		newEnemy.setPlayer(player);
 		
+		// Calculate a random angle
+		float distance = 250f;
+		float angle = (float)GD.RandRange(0, 2 * Mathf.Pi);
+        // Calculate the position using trigonometry
+        float x = GlobalPosition.X + distance * Mathf.Cos(angle);
+        float y = GlobalPosition.Y + distance * Mathf.Sin(angle);
+
+        newEnemy.GlobalPosition = new Vector2(x, y);
+
 		//set random sprite
 		int randomSpriteIndex = (int)GD.RandRange(0, sprites.Length-1);
 		newEnemy.GetNode<Sprite2D>("Sprite2D").Texture = GD.Load<Texture2D>(sprites[randomSpriteIndex]);
@@ -46,6 +55,7 @@ public partial class Spawner : Node2D
 		int b = (randomColorInt & 4) != 0 ? 1 : 0;
 		Color randomColor = new Color(r, g, b);
 		newEnemy.GetNode<Sprite2D>("Sprite2D").SelfModulate = randomColor;
+		
 		AddChild(newEnemy);
 	}
 }

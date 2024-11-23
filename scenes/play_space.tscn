@@ -50,7 +50,6 @@ scale = Vector2(10, 10)
 shape = SubResource("CircleShape2D_pned7")
 
 [node name="spawner" type="Node2D" parent="."]
-position = Vector2(-214, -155)
 script = ExtResource("4_44nx5")
 enemy = ExtResource("1_27ayd")
 
