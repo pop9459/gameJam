@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bd5wy7ldnfyjp"]
+[gd_scene load_steps=13 format=3 uid="uid://bd5wy7ldnfyjp"]
 
 [ext_resource type="PackedScene" uid="uid://dw7wqt3volbmq" path="res://prefabs/enemy.tscn" id="1_27ayd"]
 [ext_resource type="Script" path="res://scripts/Player.cs" id="1_cwxqi"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://b7boduelxq2xc" path="res://assets/color.png" id="8_3j6yn"]
 [ext_resource type="Texture2D" uid="uid://c64snotsy3scy" path="res://assets/colorMixed.png" id="9_7diml"]
 [ext_resource type="Texture2D" uid="uid://bovuoevhqfci6" path="res://assets/life.png" id="10_qcyhc"]
+[ext_resource type="Texture2D" uid="uid://bk2kmfwvuvrfv" path="res://assets/spaceimage.jpg" id="11_80l05"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_pned7"]
 radius = 20.0
@@ -99,5 +100,9 @@ texture = ExtResource("10_qcyhc")
 position = Vector2(459, 192)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("10_qcyhc")
+
+[node name="Spaceimage" type="Sprite2D" parent="."]
+z_index = -100
+texture = ExtResource("11_80l05")
 
 [connection signal="area_entered" from="Player/Hitbox" to="Player" method="_on_hitbox_area_entered"]

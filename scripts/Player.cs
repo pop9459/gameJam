@@ -30,8 +30,9 @@ public partial class Player : Node2D
 	}
 	private void OnAreaEntered(Area2D area)
 	{
-		//TODO: subtract health
+		TakeDamage(1);
 		area.GetParent().QueueFree();
+		UpdateHeartsUI();
 	}
 	public override void _Process(double delta)
 	{
@@ -112,12 +113,12 @@ public partial class Player : Node2D
 	public void TakeDamage(int damage)
 	{
 		health -= damage;
-		health = Mathf.Max(health, 0); // Prevent health from going below 0.
 		GD.Print($"Player Health: {health}");
 		UpdateHeartsUI();
 
 		if (health <= 0)
 		{
+			GD.Print("Player died!");
 			Die();
 		}
 	}
