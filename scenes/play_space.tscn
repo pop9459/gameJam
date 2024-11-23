@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://bd5wy7ldnfyjp"]
+[gd_scene load_steps=7 format=3 uid="uid://bd5wy7ldnfyjp"]
 
 [ext_resource type="Script" path="res://scripts/Aim.cs" id="1_umwtd"]
 
@@ -16,6 +16,72 @@ size = Vector2(25, 25)
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_kmtb2"]
 size = Vector2(5, 5)
 
+[sub_resource type="CSharpScript" id="CSharpScript_6u41i"]
+script/source = "using Godot;
+using System;
+
+public partial class EnemySpawner : Node2D
+{
+	[Export]
+	public PackedScene EnemyScene; // Reference to the enemy scene.
+
+	[Export]
+	public Rect2 SpawnArea = new Rect2(new Vector2(-400, -400), new Vector2(800, 800)); // Spawn rectangle.
+
+	[Export]
+	public float SpawnInterval = 2f; // Time between spawns.
+
+	private Timer _spawnTimer;
+
+	public override void _Ready()
+	{
+		// Initialize and start the spawn timer.
+		_spawnTimer = GetNode<Timer>(\"SpawnTimer\");
+		_spawnTimer.WaitTime = SpawnInterval;
+		_spawnTimer.OneShot = false;
+		_spawnTimer.Connect(\"timeout\", new Callable(this, nameof(SpawnEnemy)));
+		_spawnTimer.Start();
+	}
+
+	private void SpawnEnemy()
+	{
+		if (EnemyScene == null) return;
+
+		// Determine a random position along the perimeter.
+		Vector2 spawnPosition = GetRandomPerimeterPoint();
+		var enemy = (Node2D)EnemyScene.Instantiate();
+		enemy.GlobalPosition = spawnPosition;
+
+		AddChild(enemy);
+	}
+
+	private Vector2 GetRandomPerimeterPoint()
+	{
+		// Get the perimeter points of the rectangle.
+		float xMin = SpawnArea.Position.X; // Corrected
+		float yMin = SpawnArea.Position.Y; // Corrected
+		float xMax = xMin + SpawnArea.Size.X; // Corrected
+		float yMax = yMin + SpawnArea.Size.Y; // Corrected
+
+		// Randomly decide which edge to spawn on.
+		int edge = (int)(GD.Randi() % 4);
+		switch (edge)
+		{
+			case 0: // Top edge.
+				return new Vector2(GD.Randf() * (xMax - xMin) + xMin, yMin);
+			case 1: // Bottom edge.
+				return new Vector2(GD.Randf() * (xMax - xMin) + xMin, yMax);
+			case 2: // Left edge.
+				return new Vector2(xMin, GD.Randf() * (yMax - yMin) + yMin);
+			case 3: // Right edge.
+				return new Vector2(xMax, GD.Randf() * (yMax - yMin) + yMin);
+			default:
+				return Vector2.Zero;
+		}
+	}
+}
+"
+
 [node name="PlaySpace" type="Node2D"]
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -27,6 +93,7 @@ z_index = -10
 texture = SubResource("GradientTexture2D_ov05a")
 
 [node name="Player" type="Node2D" parent="."]
+light_mask = 3
 script = ExtResource("1_umwtd")
 
 [node name="Body" type="Sprite2D" parent="Player"]
@@ -35,3 +102,6 @@ texture = SubResource("PlaceholderTexture2D_e643y")
 [node name="Gun" type="Sprite2D" parent="Player"]
 position = Vector2(0, 25)
 texture = SubResource("PlaceholderTexture2D_kmtb2")
+
+[node name="Node2D" type="Node2D" parent="."]
+script = SubResource("CSharpScript_6u41i")

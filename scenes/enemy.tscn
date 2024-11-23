@@ -1,0 +1,81 @@
+[gd_scene load_steps=16 format=3 uid="uid://duuqyehw5vpu3"]
+
+[ext_resource type="Script" path="res://scripts/Enemy.cs" id="1_lyybi"]
+[ext_resource type="Texture2D" uid="uid://c2lg0jyumw1ui" path="res://assets/Reaper_Man_1/PNG/PNG Sequences/Running/0_Reaper_Man_Running_000.png" id="2_b2y64"]
+[ext_resource type="Texture2D" uid="uid://oib67wxq6lft" path="res://assets/Reaper_Man_1/PNG/PNG Sequences/Running/0_Reaper_Man_Running_001.png" id="3_asgiv"]
+[ext_resource type="Texture2D" uid="uid://fw68wp83k04n" path="res://assets/Reaper_Man_1/PNG/PNG Sequences/Running/0_Reaper_Man_Running_002.png" id="4_d1j5k"]
+[ext_resource type="Texture2D" uid="uid://bnukytlropoun" path="res://assets/Reaper_Man_1/PNG/PNG Sequences/Running/0_Reaper_Man_Running_003.png" id="5_klxoj"]
+[ext_resource type="Texture2D" uid="uid://b50j6apu1ikly" path="res://assets/Reaper_Man_1/PNG/PNG Sequences/Running/0_Reaper_Man_Running_004.png" id="6_u42r1"]
+[ext_resource type="Texture2D" uid="uid://dhk2nhkq766rs" path="res://assets/Reaper_Man_1/PNG/PNG Sequences/Running/0_Reaper_Man_Running_005.png" id="7_di1yl"]
+[ext_resource type="Texture2D" uid="uid://b5xxiubcfkyyp" path="res://assets/Reaper_Man_1/PNG/PNG Sequences/Running/0_Reaper_Man_Running_006.png" id="8_tdic8"]
+[ext_resource type="Texture2D" uid="uid://1jdq6jhmy6ec" path="res://assets/Reaper_Man_1/PNG/PNG Sequences/Running/0_Reaper_Man_Running_007.png" id="9_cibjc"]
+[ext_resource type="Texture2D" uid="uid://cqqv6kwab7vb4" path="res://assets/Reaper_Man_1/PNG/PNG Sequences/Running/0_Reaper_Man_Running_008.png" id="10_s0fpd"]
+[ext_resource type="Texture2D" uid="uid://bojxyvsljoe66" path="res://assets/Reaper_Man_1/PNG/PNG Sequences/Running/0_Reaper_Man_Running_009.png" id="11_thyi4"]
+[ext_resource type="Texture2D" uid="uid://qrq617517jme" path="res://assets/Reaper_Man_1/PNG/PNG Sequences/Running/0_Reaper_Man_Running_010.png" id="12_7eh4n"]
+[ext_resource type="Texture2D" uid="uid://creepqyjmfwu2" path="res://assets/Reaper_Man_1/PNG/PNG Sequences/Running/0_Reaper_Man_Running_011.png" id="13_dgdfd"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_if6s4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_b2y64")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_asgiv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_d1j5k")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_klxoj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_u42r1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_di1yl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_tdic8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_cibjc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_s0fpd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_thyi4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_7eh4n")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_dgdfd")
+}],
+"loop": true,
+"name": &"default",
+"speed": 20.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wq7tb"]
+radius = 350.0
+
+[node name="Enemy" type="Node2D"]
+script = ExtResource("1_lyybi")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.25, 0.25)
+sprite_frames = SubResource("SpriteFrames_if6s4")
+frame = 6
+frame_progress = 0.433501
+
+[node name="detection_area" type="Area2D" parent="."]
+scale = Vector2(0.25, 0.25)
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="detection_area"]
+shape = SubResource("CircleShape2D_wq7tb")
+
+[connection signal="body_entered" from="detection_area" to="." method="_on_detection_area_body_entered"]
+[connection signal="body_exited" from="detection_area" to="." method="_on_detection_area_body_exited"]
