@@ -5,6 +5,7 @@ public partial class Enemy : Node2D
 {
 	// Called when the node enters the scene tree for the first time.
 	private Node2D player;
+	private float speed = 50f;
 	public void setPlayer(Node2D player)
 	{
 		this.player = player;
@@ -18,6 +19,6 @@ public partial class Enemy : Node2D
 	{
 		if (player == null) return;
 		Vector2 direction = (player.GlobalPosition - GlobalPosition).Normalized();
-		GlobalPosition += direction * (float)delta * 100; // Adjust the speed as needed
+		GlobalPosition += direction * (float)delta * speed; // Adjust the speed as needed
 	}
 }

@@ -3,7 +3,7 @@ using System;
 
 public partial class bullet : Node2D
 {
-	private float speed = 200f;
+	private float speed = 250f;
 	private Vector2 origin;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
