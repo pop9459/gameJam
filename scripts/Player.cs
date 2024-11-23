@@ -1,6 +1,5 @@
 using Godot;
 using System;
-using System.Runtime.CompilerServices;
 
 public partial class Player : Node2D
 {
@@ -15,7 +14,7 @@ public partial class Player : Node2D
 	[Export] private Node2D greenIndicator;
 	[Export] private Node2D blueIndicator;
 	[Export] private Node2D mixIndicator;
-	[Export] private Color selectedColor = new Color(1, 1, 1); 
+	private Color selectedColor = new Color(1, 1, 1); 
 	public override void _Ready()
 	{
 		gun = GetNode<Node2D>("Gun");
@@ -61,6 +60,7 @@ public partial class Player : Node2D
 		newBullet.Position = gun.GlobalPosition;
 		newBullet.Rotation = angle;
 		newBullet.GetNode<Sprite2D>("BulletImg").SelfModulate = selectedColor;
+		newBullet.Set("color", selectedColor);
 		AddChild(newBullet);
 	}
 

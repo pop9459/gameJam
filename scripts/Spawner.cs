@@ -56,6 +56,8 @@ public partial class Spawner : Node2D
 		Color randomColor = new Color(r, g, b);
 		newEnemy.GetNode<Sprite2D>("Sprite2D").SelfModulate = randomColor;
 		
+		newEnemy.Set("color", randomColor);
+
 		AddChild(newEnemy);
 	}
 }

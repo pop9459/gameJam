@@ -5,12 +5,13 @@ public partial class Enemy : Node2D
 {
 	// Called when the node enters the scene tree for the first time.
 	private Node2D player;
-	private float speed = 50f;
+	private float speed = 50;
+	public Color color;
 	public void setPlayer(Node2D player)
 	{
 		this.player = player;
 	}
-    public override void _EnterTree()
+    public override void _Ready()
     {
 
     }
