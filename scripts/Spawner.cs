@@ -22,6 +22,9 @@ public partial class Spawner : Node2D
 	{
 		Enemy newEnemy = enemy.Instantiate<Enemy>();
 		newEnemy.setPlayer(player);
+
+		Color randomColor = new Color((float)GD.RandRange(0, 1), (float)GD.RandRange(0, 1), (float)GD.RandRange(0, 1));
+		newEnemy.GetNode<Sprite2D>("Sprite2D").SelfModulate = randomColor;
 		AddChild(newEnemy);
 	}
 }
