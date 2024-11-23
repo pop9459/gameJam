@@ -10,7 +10,11 @@ public partial class Player : Node2D
 	private bool redEnabled = false;
 	private bool greenEnabled = false;
 	private bool blueEnabled = false;
-	private Color selectedColor = new Color(1, 1, 1); 
+	[Export] private Node2D redIndicator;
+	[Export] private Node2D greenIndicator;
+	[Export] private Node2D blueIndicator;
+	[Export] private Node2D mixIndicator;
+	[Export] private Color selectedColor = new Color(1, 1, 1); 
 	public override void _Ready()
 	{
 		gun = GetNode<Node2D>("Gun");
@@ -34,8 +38,16 @@ public partial class Player : Node2D
 		selectedColor.R = redEnabled ? 1 : 0;
 		selectedColor.G = greenEnabled ? 1 : 0;
 		selectedColor.B = blueEnabled ? 1 : 0;
-	}
 
+		updateIndicators();
+	}
+	private void updateIndicators()
+	{
+		redIndicator.SelfModulate = redEnabled ? new Color(1, 0, 0) : new Color(1, 0.75f, 0.75f);
+		greenIndicator.SelfModulate = greenEnabled ? new Color(0, 1, 0) : new Color(0.75f, 1, 0.75f);
+		blueIndicator.SelfModulate = blueEnabled ? new Color(0, 0, 1) : new Color(0.75f, 0.75f, 1);
+		mixIndicator.SelfModulate = selectedColor;
+	}
 	private void shoot()
 	{
 		Node2D newBullet = bullet.Instantiate<Node2D>();
