@@ -6,6 +6,9 @@ public partial class Player : Node2D
 	private float angle = 0f; // Current angle in radians
 	private float radius = 25f; // Distance from parent
 	private Node2D gun;
+	private double shootDelay = 1f;
+	private double nextShoot = 0f;
+	private double totalElapsed = 0;
 	[Export] private PackedScene bullet;
 	private bool redEnabled = false;
 	private bool greenEnabled = false;
@@ -28,6 +31,8 @@ public partial class Player : Node2D
     }
 	public override void _Process(double delta)
 	{
+		totalElapsed += delta;
+
 		aim();
 		selectColor();
 		if (Input.IsActionJustPressed("shoot"))
@@ -56,12 +61,16 @@ public partial class Player : Node2D
 	}
 	private void shoot()
 	{
-		Node2D newBullet = bullet.Instantiate<Node2D>();
-		newBullet.Position = gun.GlobalPosition;
-		newBullet.Rotation = angle;
-		newBullet.GetNode<Sprite2D>("BulletImg").SelfModulate = selectedColor;
-		newBullet.Set("color", selectedColor);
-		AddChild(newBullet);
+		if (totalElapsed > nextShoot)
+		{
+			nextShoot = totalElapsed + shootDelay;
+			Node2D newBullet = bullet.Instantiate<Node2D>();
+			newBullet.Position = gun.GlobalPosition;
+			newBullet.Rotation = angle;
+			newBullet.GetNode<Sprite2D>("BulletImg").SelfModulate = selectedColor;
+			newBullet.Set("color", selectedColor);
+			AddChild(newBullet);
+		}
 	}
 
 	private void aim()
