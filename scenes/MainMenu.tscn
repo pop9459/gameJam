@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://66fenyw1hqhw"]
+[gd_scene load_steps=4 format=3 uid="uid://66fenyw1hqhw"]
 
 [ext_resource type="Script" path="res://scripts/main_menu.gd" id="1_h1tj6"]
 [ext_resource type="Texture2D" uid="uid://knlv16f78vkj" path="res://assets/mainmenuimage.png" id="1_t365h"]
+[ext_resource type="AudioStream" uid="uid://1ms3mwcc60r6" path="res://assets/deep-ambient-version-60s-9889.mp3" id="3_7v0q7"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -45,6 +46,11 @@ text = "Quit "
 position = Vector2(640, 358)
 scale = Vector2(0.764623, 0.719999)
 texture = ExtResource("1_t365h")
+
+[node name="Deep-ambient-version-60s-9889" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_7v0q7")
+volume_db = -10.0
+autoplay = true
 
 [connection signal="pressed" from="VBoxContainer/PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
