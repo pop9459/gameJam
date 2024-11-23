@@ -66,5 +66,14 @@ public partial class Player : Node2D
 
 		// Apply the new position relative to the parent
 		gun.Position = newPosition;
+		gun.Rotation = angle;
+		if (directionToMouse.X < 0)
+		{
+			gun.Scale = new Vector2(gun.Scale.X, -Mathf.Abs(gun.Scale.Y));
+		}
+		else
+		{
+			gun.Scale = new Vector2(gun.Scale.X, Mathf.Abs(gun.Scale.Y));
+		}
 	}
 }

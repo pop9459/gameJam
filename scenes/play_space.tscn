@@ -1,21 +1,12 @@
-[gd_scene load_steps=9 format=3 uid="uid://bd5wy7ldnfyjp"]
+[gd_scene load_steps=8 format=3 uid="uid://bd5wy7ldnfyjp"]
 
 [ext_resource type="PackedScene" uid="uid://dw7wqt3volbmq" path="res://prefabs/enemy.tscn" id="1_27ayd"]
 [ext_resource type="Script" path="res://scripts/Player.cs" id="1_cwxqi"]
 [ext_resource type="PackedScene" uid="uid://bwrj0ne0cb20b" path="res://prefabs/bullet.tscn" id="1_eoggm"]
+[ext_resource type="Texture2D" uid="uid://c13npvcf43qlw" path="res://assets/bg.png" id="1_x23d7"]
 [ext_resource type="Texture2D" uid="uid://cwyiscta484y8" path="res://assets/lilguyF.png" id="3_ud46j"]
 [ext_resource type="Script" path="res://scripts/Spawner.cs" id="4_44nx5"]
-
-[sub_resource type="Gradient" id="Gradient_unpoe"]
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_ov05a"]
-gradient = SubResource("Gradient_unpoe")
-width = 800
-height = 600
-fill_from = Vector2(0, 0.476103)
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_kmtb2"]
-size = Vector2(5, 5)
+[ext_resource type="Texture2D" uid="uid://cdjag6c7evevq" path="res://assets/gun.png" id="5_5labu"]
 
 [node name="PlaySpace" type="Node2D"]
 
@@ -25,7 +16,8 @@ size = Vector2(5, 5)
 
 [node name="Bkg" type="Sprite2D" parent="Room"]
 z_index = -10
-texture = SubResource("GradientTexture2D_ov05a")
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("1_x23d7")
 
 [node name="Player" type="Node2D" parent="."]
 script = ExtResource("1_cwxqi")
@@ -36,8 +28,9 @@ scale = Vector2(0.1, 0.1)
 texture = ExtResource("3_ud46j")
 
 [node name="Gun" type="Sprite2D" parent="Player"]
-position = Vector2(0, 25)
-texture = SubResource("PlaceholderTexture2D_kmtb2")
+position = Vector2(50, 1.90735e-06)
+scale = Vector2(0.05, 0.05)
+texture = ExtResource("5_5labu")
 
 [node name="spawner" type="Node2D" parent="."]
 position = Vector2(-214, -155)
