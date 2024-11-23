@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bd5wy7ldnfyjp"]
+[gd_scene load_steps=11 format=3 uid="uid://bd5wy7ldnfyjp"]
 
 [ext_resource type="PackedScene" uid="uid://dw7wqt3volbmq" path="res://prefabs/enemy.tscn" id="1_27ayd"]
 [ext_resource type="Script" path="res://scripts/Player.cs" id="1_cwxqi"]
@@ -10,71 +10,8 @@
 [ext_resource type="Texture2D" uid="uid://b7boduelxq2xc" path="res://assets/color.png" id="8_3j6yn"]
 [ext_resource type="Texture2D" uid="uid://c64snotsy3scy" path="res://assets/colorMixed.png" id="9_7diml"]
 
-[sub_resource type="CSharpScript" id="CSharpScript_6u41i"]
-script/source = "using Godot;
-using System;
-
-public partial class EnemySpawner : Node2D
-{
-	[Export]
-	public PackedScene EnemyScene; // Reference to the enemy scene.
-
-	[Export]
-	public Rect2 SpawnArea = new Rect2(new Vector2(-400, -400), new Vector2(800, 800)); // Spawn rectangle.
-
-	[Export]
-	public float SpawnInterval = 2f; // Time between spawns.
-
-	private Timer _spawnTimer;
-
-	public override void _Ready()
-	{
-		// Initialize and start the spawn timer.
-		_spawnTimer = GetNode<Timer>(\"SpawnTimer\");
-		_spawnTimer.WaitTime = SpawnInterval;
-		_spawnTimer.OneShot = false;
-		_spawnTimer.Connect(\"timeout\", new Callable(this, nameof(SpawnEnemy)));
-		_spawnTimer.Start();
-	}
-
-	private void SpawnEnemy()
-	{
-		if (EnemyScene == null) return;
-
-		// Determine a random position along the perimeter.
-		Vector2 spawnPosition = GetRandomPerimeterPoint();
-		var enemy = (Node2D)EnemyScene.Instantiate();
-		enemy.GlobalPosition = spawnPosition;
-
-		AddChild(enemy);
-	}
-
-	private Vector2 GetRandomPerimeterPoint()
-	{
-		// Get the perimeter points of the rectangle.
-		float xMin = SpawnArea.Position.X; // Corrected
-		float yMin = SpawnArea.Position.Y; // Corrected
-		float xMax = xMin + SpawnArea.Size.X; // Corrected
-		float yMax = yMin + SpawnArea.Size.Y; // Corrected
-
-		// Randomly decide which edge to spawn on.
-		int edge = (int)(GD.Randi() % 4);
-		switch (edge)
-		{
-			case 0: // Top edge.
-				return new Vector2(GD.Randf() * (xMax - xMin) + xMin, yMin);
-			case 1: // Bottom edge.
-				return new Vector2(GD.Randf() * (xMax - xMin) + xMin, yMax);
-			case 2: // Left edge.
-				return new Vector2(xMin, GD.Randf() * (yMax - yMin) + yMin);
-			case 3: // Right edge.
-				return new Vector2(xMax, GD.Randf() * (yMax - yMin) + yMin);
-			default:
-				return Vector2.Zero;
-		}
-	}
-}
-"
+[sub_resource type="CircleShape2D" id="CircleShape2D_pned7"]
+radius = 20.0
 
 [node name="PlaySpace" type="Node2D"]
 
@@ -103,6 +40,14 @@ texture = ExtResource("3_ud46j")
 position = Vector2(50, 1.90735e-06)
 scale = Vector2(0.05, 0.05)
 texture = ExtResource("5_5labu")
+
+[node name="Hitbox" type="Area2D" parent="Player"]
+scale = Vector2(0.1, 0.1)
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/Hitbox"]
+scale = Vector2(10, 10)
+shape = SubResource("CircleShape2D_pned7")
 
 [node name="spawner" type="Node2D" parent="."]
 position = Vector2(-214, -155)
@@ -133,3 +78,5 @@ texture = ExtResource("8_3j6yn")
 position = Vector2(0, 500)
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("9_7diml")
+
+[connection signal="area_entered" from="Player/Hitbox" to="Player" method="_on_hitbox_area_entered"]

@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://bwrj0ne0cb20b"]
+[gd_scene load_steps=4 format=3 uid="uid://bwrj0ne0cb20b"]
 
 [ext_resource type="Script" path="res://scripts/bullet.cs" id="1_b5tip"]
 [ext_resource type="Texture2D" uid="uid://keoq4ys82b36" path="res://assets/bullet.png" id="1_q41gu"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_16hqr"]
 
 [node name="Bullet" type="Node2D"]
 
@@ -9,3 +11,8 @@
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("1_q41gu")
 script = ExtResource("1_b5tip")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_16hqr")

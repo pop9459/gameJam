@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Runtime.CompilerServices;
 
 public partial class Player : Node2D
 {
@@ -18,8 +19,13 @@ public partial class Player : Node2D
 	public override void _Ready()
 	{
 		gun = GetNode<Node2D>("Gun");
+		var area2D = GetNode<Area2D>("Hitbox");
+        area2D.AreaEntered += OnAreaEntered;
 	}
-
+	private void OnAreaEntered(Area2D area)
+    {
+        GD.Print($"Collision detected with: {area.Name}");
+    }
 	public override void _Process(double delta)
 	{
 		aim();
